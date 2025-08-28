@@ -5,7 +5,7 @@ let clientPromise: Promise<MongoClient> | null = null
 const uri =
   "mongodb+srv://hocvienphs:kienhd1231%40@cluster0.8ca8jsd.mongodb.net/tutien?retryWrites=true&w=majority&ssl=true"
 
-// const options = {
+const options = {
 //   ssl: true,
 //   serverSelectionTimeoutMS: 30000,
 //   socketTimeoutMS: 0,
@@ -16,8 +16,8 @@ const uri =
 //   waitQueueTimeoutMS: 10000,
 //   heartbeatFrequencyMS: 10000,
 //   retryWrites: true,
-//   retryReads: true,
-// }
+  retryReads: true,
+}
 
 let client
 
