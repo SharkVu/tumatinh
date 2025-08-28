@@ -3,7 +3,20 @@ import { MongoClient } from "mongodb"
 let clientPromise: Promise<MongoClient> | null = null
 
 const uri = "mongodb+srv://hocvienphs:kienhd1231%40@cluster0.8ca8jsd.mongodb.net/tutien?retryWrites=true&w=majority"
-const options = {}
+
+const options = {
+  tls: true,
+  tlsAllowInvalidCertificates: false,
+  tlsAllowInvalidHostnames: false,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+  maxPoolSize: 10,
+  minPoolSize: 5,
+  maxIdleTimeMS: 30000,
+  bufferMaxEntries: 0,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}
 
 let client
 
@@ -26,9 +39,14 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export async function connectToDatabase() {
-  const client = await clientPromise!
-  const db = client.db("tutien")
-  return { client, db }
+  try {
+    const client = await clientPromise!
+    const db = client.db("tutien")
+    return { client, db }
+  } catch (error) {
+    console.error("MongoDB connection error:", error)
+    throw new Error("Failed to connect to MongoDB")
+  }
 }
 
 // Export a module-scoped MongoClient promise. By doing this in a
