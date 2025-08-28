@@ -6,7 +6,6 @@ const uri =
 
 const options = {
   ssl: true,
-  sslValidate: true,
   serverSelectionTimeoutMS: 30000,
   socketTimeoutMS: 0,
   connectTimeoutMS: 30000,
